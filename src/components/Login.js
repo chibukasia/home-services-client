@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,17 +30,20 @@ function Copyright(props) {
 const theme = createTheme();
 
 function SignIn() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     console.log({
-//       email: data.get('email'),
-//       password: data.get('password'),
-//     });
-//   };
+const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+})
 
-function handleSubmit(){
-
+function handleChange(e){
+    let name = e.target.name 
+    let value = e.target.value
+    
+    setFormData({...formData, [name]: value})
+}
+function handleSubmit(e){
+    e.preventDefault()
+    console.log(formData)
 }
   return (
     <ThemeProvider theme={theme}>
@@ -70,6 +73,7 @@ function handleSubmit(){
               name="username"
               autoComplete="username"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -80,6 +84,7 @@ function handleSubmit(){
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

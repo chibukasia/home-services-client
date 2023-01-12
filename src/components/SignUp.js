@@ -1,28 +1,33 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { FormControl, FormLabel, Radio, RadioGroup } from '@mui/material';
+import React, { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Homeservices
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -30,17 +35,32 @@ function Copyright(props) {
 const theme = createTheme();
 
 function SignUp() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     console.log({
-//       email: data.get('email'),
-//       password: data.get('password'),
-//     });
-//   };
-function handleSubmit(){
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    phone: "",
+    role: "",
+    password: "",
+    password_confirmation: "",
+    premium: false,
+    active: true,
+    on_probation: false,
+    address: "",
+  });
 
-}
+  function handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setFormData({ ...formData, [name]: value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(formData);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -49,38 +69,45 @@ function handleSubmit(){
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Account Registration
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="first_name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="first_name"
                   label="First Name"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="last_name"
                   label="Last Name"
-                  name="lastName"
+                  name="last_name"
                   autoComplete="family-name"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,6 +118,7 @@ function handleSubmit(){
                   label="Username"
                   name="username"
                   autoComplete="username"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -101,6 +129,7 @@ function handleSubmit(){
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -111,6 +140,7 @@ function handleSubmit(){
                   label="Phone number"
                   name="phone"
                   autoComplete="phone"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,6 +152,7 @@ function handleSubmit(){
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -133,6 +164,7 @@ function handleSubmit(){
                   type="password"
                   id="confirm_password"
                   autoComplete="new-password"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -142,24 +174,36 @@ function handleSubmit(){
                   label="Address"
                   name="address"
                   autoComplete="address"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormLabel id="demo-row-radio-buttons-group-label" required>Register As</FormLabel>
+                <FormLabel id="demo-row-radio-buttons-group-label" required>
+                  Register As
+                </FormLabel>
                 <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="role"
-                    
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="role"
+                  onChange={handleChange}
                 >
-                    <FormControlLabel value={'home_owner'} control={<Radio />} label="Home Owner"/>
-                    <FormControlLabel value={'service_person'} control={<Radio />} label="Service Person"/>
+                  <FormControlLabel
+                    value={"regular"}
+                    control={<Radio />}
+                    label="Home Owner"
+                  />
+                  <FormControlLabel
+                    value={"service person"}
+                    control={<Radio />}
+                    label="Service Person"
+                  />
                 </RadioGroup>
-                
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
@@ -187,4 +231,4 @@ function handleSubmit(){
   );
 }
 
-export default SignUp
+export default SignUp;
