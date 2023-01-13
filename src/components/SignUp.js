@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
+import { Error } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -34,7 +36,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function SignUp() {
+function SignUp({onSignUp}) {
+  const [errors, setErrors]=useState([])
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -49,7 +52,11 @@ function SignUp() {
     on_probation: false,
     address: "",
   });
+  // const [profileData, setProfileData] = useState({
+  //   bio: 'user bio',
+  // })
 
+  const navigate = useNavigate()
   function handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
@@ -59,12 +66,43 @@ function SignUp() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
+
+    fetch('http://localhost:3000/users',{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }).then(res=>{
+      if(res.ok){
+        res.json().then(user=>{
+          onSignUp(user)
+          navigate('/')
+        })
+      }else{
+        res.json().then((err) => setErrors(err.errors));
+      }
+    }) 
+
+    // fetch('http://localhost:3000/profiles',{
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type":"application/json"
+    //   },
+    //   body: JSON.stringify(profileData)
+    // }).then(res=>{
+    //   if (res.ok){
+    //     res.json().then(console.log)
+    //   }else{
+    //     res.json().then(err=>console.log(err))
+    //   }
+    // })
   }
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
+        {errors.map(err=><Typography key={err} sx={{color: "red"}} ><Error/>{err}</Typography>)}
         <CssBaseline />
         <Box
           sx={{
