@@ -12,7 +12,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Login } from '@mui/icons-material';
+import { Error } from '@mui/icons-material';
+import { OutlinedFlagOutlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -29,12 +31,14 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function SignIn() {
+function SignIn({onLogin}) {
+const [errors, setErrors] = useState('')
 const [formData, setFormData] = useState({
     username: '',
     password: '',
 })
 
+const navigate = useNavigate()
 function handleChange(e){
     let name = e.target.name 
     let value = e.target.value
@@ -43,12 +47,29 @@ function handleChange(e){
 }
 function handleSubmit(e){
     e.preventDefault()
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    }).then(res=>{
+      if (res.ok){
+        res.json().then(user=>{
+          onLogin(user)
+          navigate('/')
+        })
+      }else{
+        res.json().then(err=>setErrors(err.error))
+      }
+    })
     console.log(formData)
 }
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        
         <Box
           sx={{
             marginTop: 8,
@@ -57,6 +78,7 @@ function handleSubmit(e){
             alignItems: 'center',
           }}
         >
+          <Typography sx={{color: "red"}}><Error/>{errors}</Typography>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
