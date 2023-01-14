@@ -27,7 +27,7 @@ const pages = [
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({user}) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -139,7 +139,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
+          {user ? 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -164,11 +164,15 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Link className="links">{setting}</Link>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> :
+           <Box>
+              <Button variant="contained" href="/login">Login</Button>
+              <Button variant="contained" href="/signup">Sign up</Button>
+            </Box>}
         </Toolbar>
       </Container>
     </AppBar>

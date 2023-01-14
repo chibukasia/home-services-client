@@ -4,24 +4,39 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
 import SignIn from './components/Login';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, version } from 'react';
 import ResponsiveAppBar from './components/NavBar';
 import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Services from './components/Services';
 
 function App() {
-  const [user, setUser]=useState(null)
+  console.log(version)
+  const [user, setUser] = useState(null);
 
   // Fetch a logged user
-  useEffect(()=>{
-    fetch('http://localhost:3000/logged_user')
-    .then(res=>res.json())
-    .then(user=>setUser(user))
-  },[])
+  // useEffect(()=>{
+  //   fetch('http://localhost:3000/logged_user')
+  //   .then(res=>{
+  //     if (res.ok){
+  //       res.json().then(user=>setUser(user))
+  //     }
+  //   }) 
+  // },[])
+
+  useEffect(() => {
+    fetch("http://localhost:3000/logged_user").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }else{
+        response.json().then(err=>console.log(err))
+      }
+    });
+  }, []);
+  
   return (
     <div className="App">
-      <ResponsiveAppBar/>
+      <ResponsiveAppBar user={user}/>
       <Routes>
         <Route exact path='/' element={<Home user={user}/>}/>
         <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>

@@ -63,7 +63,6 @@ function handleSubmit(e){
         res.json().then(err=>setErrors(err.error))
       }
     })
-    console.log(formData)
 }
   return (
     <ThemeProvider theme={theme}>

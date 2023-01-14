@@ -76,27 +76,13 @@ function SignUp({onSignUp}) {
     }).then(res=>{
       if(res.ok){
         res.json().then(user=>{
-          onSignUp(user)
+          onSignUp(user.user)
           navigate('/')
         })
       }else{
         res.json().then((err) => setErrors(err.errors));
       }
     }) 
-
-    // fetch('http://localhost:3000/profiles',{
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type":"application/json"
-    //   },
-    //   body: JSON.stringify(profileData)
-    // }).then(res=>{
-    //   if (res.ok){
-    //     res.json().then(console.log)
-    //   }else{
-    //     res.json().then(err=>console.log(err))
-    //   }
-    // })
   }
 
   return (
