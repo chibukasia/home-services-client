@@ -14,22 +14,11 @@ function App() {
   console.log(version)
   const [user, setUser] = useState(null);
 
-  // Fetch a logged user
-  // useEffect(()=>{
-  //   fetch('http://localhost:3000/logged_user')
-  //   .then(res=>{
-  //     if (res.ok){
-  //       res.json().then(user=>setUser(user))
-  //     }
-  //   }) 
-  // },[])
-
   useEffect(() => {
-    fetch("http://localhost:3000/logged_user").then((response) => {
+    fetch("http://localhost:3000/logged_user")
+    .then((response) => {
       if (response.ok) {
         response.json().then((user) => setUser(user));
-      }else{
-        response.json().then(err=>console.log(err))
       }
     });
   }, []);
