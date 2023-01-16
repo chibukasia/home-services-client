@@ -55,8 +55,9 @@ function handleSubmit(e){
       body: JSON.stringify(formData)
     }).then(res=>{
       if (res.ok){
-        res.json().then(user=>{
-          onLogin(user)
+        res.json().then(data=>{
+          onLogin(data.user)
+          localStorage.setItem('token', data.jwt)
           navigate('/')
         })
       }else{

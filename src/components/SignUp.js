@@ -75,8 +75,9 @@ function SignUp({onSignUp}) {
       body: JSON.stringify(formData)
     }).then(res=>{
       if(res.ok){
-        res.json().then(user=>{
-          onSignUp(user.user)
+        res.json().then(data=>{
+          onSignUp(data.user)
+          localStorage.setItem('token', data.jwt)
           navigate('/')
         })
       }else{

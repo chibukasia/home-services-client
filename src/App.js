@@ -13,9 +13,14 @@ import Services from './components/Services';
 function App() {
   console.log(version)
   const [user, setUser] = useState(null);
-
+  const token = localStorage.getItem('token')
   useEffect(() => {
-    fetch("http://localhost:3000/logged_user")
+    fetch("http://localhost:3000/logged_user",{
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
     .then((response) => {
       if (response.ok) {
         response.json().then((user) => setUser(user));
