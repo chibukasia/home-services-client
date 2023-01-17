@@ -9,9 +9,9 @@ import ResponsiveAppBar from './components/NavBar';
 import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Services from './components/Services';
+import ServiceForm from './components/ServiceForm';
 
 function App() {
-  console.log(version)
   const [user, setUser] = useState(null);
   const token = localStorage.getItem('token')
   useEffect(() => {
@@ -31,6 +31,7 @@ function App() {
   return (
     <div className="App">
       <ResponsiveAppBar user={user}/>
+      <ServiceForm/>
       <Routes>
         <Route exact path='/' element={<Home user={user}/>}/>
         <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>
