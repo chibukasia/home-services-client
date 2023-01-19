@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
       <ResponsiveAppBar user={user}/>
-      <ServiceForm/>
+      <div><ServiceForm/></div>
       <Routes>
         <Route exact path='/' element={<Home user={user}/>}/>
         <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>

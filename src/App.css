@@ -44,6 +44,9 @@
 }
 
 .service-form {
-  width: 80%;
+  width: 50%;
   margin: 3rem auto;
+}
+.h-1{
+  text-align: center;
 }
