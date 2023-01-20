@@ -27,7 +27,7 @@ const pages = [
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function ResponsiveAppBar({user}) {
+function ResponsiveAppBar({user, setUser}) {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -46,6 +46,10 @@ function ResponsiveAppBar({user}) {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () =>{
+    localStorage.removeItem('token')
+    setUser(null)
+  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -162,11 +166,20 @@ function ResponsiveAppBar({user}) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Link className="links">{setting}</Link>
                 </MenuItem>
-              ))}
+              ))} */}
+              <MenuItem onClick={handleCloseUserMenu}>
+                  <Link className="links">Profile</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                  <Link className="links">Dashboard</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                  <Link className="links" onClick={handleLogout}>Logout</Link>
+              </MenuItem>
             </Menu>
           </Box> :
            <Box>

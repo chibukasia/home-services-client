@@ -10,6 +10,7 @@ import About from './components/About';
 import ContactUs from './components/ContactUs';
 import Services from './components/Services';
 import ServiceForm from './components/ServiceForm';
+import Footer from './components/Footer';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,8 +31,7 @@ function App() {
   
   return (
     <div className="App">
-      <ResponsiveAppBar user={user}/>
-      <div><ServiceForm/></div>
+      <ResponsiveAppBar user={user} setUser={setUser}/>
       <Routes>
         <Route exact path='/' element={<Home user={user}/>}/>
         <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>
@@ -39,7 +39,9 @@ function App() {
         <Route exact path='/about' element={<About/>}/>
         <Route exact path='/contact' element={<ContactUs/>}/>
         <Route exact path='/services' element={<Services/>}/>
+        <Route exact path='/new-service' element={<ServiceForm/>}/>
       </Routes>
+      <footer><Footer/></footer>
     </div>
   );
 }

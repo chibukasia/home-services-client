@@ -78,7 +78,7 @@ function handleSubmit(e){
             alignItems: 'center',
           }}
         >
-          <Typography sx={{color: "red"}}><Error/>{errors}</Typography>
+          <Typography sx={{color: "red"}}>{errors}</Typography>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
