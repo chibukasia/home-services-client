@@ -10,6 +10,7 @@ function ServiceForm() {
     description: "",
   });
   
+  const token =localStorage.getItem('token')
   // Get the user service
   function handleChange(e){
     let name = e.target.name 
@@ -24,6 +25,7 @@ function ServiceForm() {
     fetch("http://localhost:3000/services", {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(service)
