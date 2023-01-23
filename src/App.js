@@ -2,14 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import SignUp from './components/SignUp';
-import SignIn from './components/Login';
-import { useEffect, useState, version } from 'react';
+import SignUp from './components/authentication/SignUp';
+import SignIn from './components/authentication/Login';
+import { useEffect, useState} from 'react';
 import ResponsiveAppBar from './components/NavBar';
 import About from './components/About';
 import ContactUs from './components/ContactUs';
-import Services from './components/Services';
-import ServiceForm from './components/ServiceForm';
+import Services from './components/services/Services';
+import ServiceForm from './components/services/ServiceForm';
 import Footer from './components/Footer';
 
 function App() {
