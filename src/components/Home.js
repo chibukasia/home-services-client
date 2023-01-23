@@ -1,9 +1,10 @@
 import React from 'react'
+import UserService from './services/UserService'
 
 function Home({user}) { 
-  console.log(user)
   return (
     <div>
+      <UserService/>
       {user ? <h2>Hello there {user.username}</h2>: <h2>Login</h2>}
     </div>
   )
