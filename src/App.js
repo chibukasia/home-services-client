@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [services, setServices] = useState([])
   const token = localStorage.getItem('token')
   useEffect(() => {
     fetch("http://localhost:3000/logged_user",{
@@ -28,6 +29,22 @@ function App() {
       }
     });
   }, []);
+
+  useEffect(()=>{
+    fetch("http://localhost:3000/services", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      } 
+    })
+    .then(res=>{
+      if (res.ok){
+        res.json().then(data=>setServices(data))
+      }else{
+        res.json().then(error=>console.log(error))
+      }
+    })
+  },[])
   
   return (
     <div className="App">
