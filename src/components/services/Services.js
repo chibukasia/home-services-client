@@ -1,6 +1,9 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 function Services() {
+  useEffect(()=>{
+    document.title = "service"
+  })
   return (
     <div>
         <h2>Services</h2>

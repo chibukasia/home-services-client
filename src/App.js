@@ -50,7 +50,7 @@ function App() {
     <div className="App">
       <ResponsiveAppBar user={user} setUser={setUser}/>
       <Routes>
-        <Route exact path='/' element={<Home user={user}/>}/>
+        <Route exact path='/' element={<Home user={user} services={services}/>}/>
         <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>
         <Route exact path='/login' element={<SignIn onLogin={setUser}/>}/>
         <Route exact path='/about' element={<About/>}/>

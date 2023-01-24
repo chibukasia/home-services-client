@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function UserService() {
+function UserService({services}) {
   const [userService, setUserService] = useState({
-    service_id: "",
     quotation: "",
     location: "",
     description: "",
+    service_id: "",
   });
 
   const token = localStorage.getItem("token");
@@ -14,14 +14,15 @@ function UserService() {
     let name = e.target.name 
     let value = e.target.value 
     if (name === "quotation"){
-        setUserService({...userService, [name]: parseInt(value)})
+        value = parseInt(value)
+        setUserService({...userService, [name]: value})
     }
     setUserService({...userService, [name]: value})
   } 
 
   function handleSubmit(e){
     e.preventDefault()
-    // console.log(userService)
+    console.log(userService)
     fetch('http://localhost:3000/user_services',{
         method: "POST",
         headers: {
@@ -37,6 +38,9 @@ function UserService() {
         }
     })
   }
+  useEffect(()=>{
+    document.title = "New service"
+  })
   return (
     <div className="service-form">
       <form className="form-control p-4 shadow" onSubmit={handleSubmit}>
@@ -46,9 +50,7 @@ function UserService() {
           </label>
           <select className="form-select" aria-label="Default select example" name="service_id" id="service" onChange={handleChange}>
             <option defaultValue>Select Service</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            {services.map(service=><option key={service.id} value={service.id}>{service.service_name}</option>)}
           </select>
         </div>
         <div className="mb-3">
