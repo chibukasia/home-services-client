@@ -153,7 +153,7 @@ function UserService({ services }) {
         </div>
         <div className="col-12 submit">
           <button className="btn btn-primary " type="submit">
-            Submit
+            Add Service
           </button>
         </div>
       </form>
