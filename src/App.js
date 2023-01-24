@@ -11,6 +11,7 @@ import ContactUs from './components/ContactUs';
 import Services from './components/services/Services';
 import ServiceForm from './components/services/ServiceForm';
 import Footer from './components/Footer';
+import UserService from './components/services/UserService';
 import { AppContext } from './context';
 import { useContext } from 'react';
 
@@ -59,6 +60,7 @@ function App() {
         <Route exact path='/contact' element={<ContactUs/>}/>
         <Route exact path='/services' element={<Services/>}/>
         <Route exact path='/new-service' element={<ServiceForm/>}/>
+        <Route exact path='/add-user-service' element={<UserService services={services}/>}/>
       </Routes>
       <footer><Footer/></footer>
     </div>

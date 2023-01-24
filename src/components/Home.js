@@ -1,5 +1,4 @@
 import React, {useEffect, useContext} from 'react'
-import UserService from './services/UserService'
 import { AppContext } from '../context'
 
 function Home() { 
@@ -8,8 +7,7 @@ function Home() {
     document.title = "Home"
   })
   return (
-    <div>
-      <UserService services={services}/>
+    <div className='main'>
       {user ? <h2>Hello there {user.username}</h2>: <h2>Login</h2>}
     </div>
   )

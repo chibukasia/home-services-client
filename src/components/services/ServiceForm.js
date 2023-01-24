@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
@@ -11,6 +11,7 @@ function ServiceForm() {
   });
 
   const token = localStorage.getItem("token");
+  const formReset = useRef()
   // Get the user service
   function handleChange(e) {
     let name = e.target.name;
@@ -34,6 +35,7 @@ function ServiceForm() {
         response.json().then((data) => {
           console.log(data);
           setSuccess("Service Added successfully");
+          formReset.current.reset()
         });
       } else {
         response.json().then((err) => setErrors(err.errors));
@@ -43,7 +45,7 @@ function ServiceForm() {
   return (
     <div className="service-form">
       <h1 className="display-4 h-1">Add a new service</h1>
-      <form className="form-control p-4 shadow" onSubmit={handleSubmit}>
+      <form className="form-control p-4 shadow" onSubmit={handleSubmit} ref={formReset}>
         {<p style={{ color: "green" }}>{success}</p>}
         {errors.map((error) => {
           return (

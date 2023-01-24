@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { AppContext } from "../../context";
+import "./services.css";
 
 function UserService({ services }) {
   const [errors, setErrors] = useState([]);
@@ -11,6 +12,7 @@ function UserService({ services }) {
     service_id: "",
   });
 
+  const formReset = useRef();
   const { userServices, setUserServices } = useContext(AppContext);
   const token = localStorage.getItem("token");
 
@@ -39,6 +41,7 @@ function UserService({ services }) {
         res.json().then((data) => {
           setUserServices([...userServices, data]);
           setMessage("Your service has been added seccesfully");
+          formReset.current.reset();
         });
       } else {
         res.json().then((err) => console.log(err));
@@ -50,20 +53,26 @@ function UserService({ services }) {
   });
   return (
     <div className="service-form">
-      <form className="form-control p-4 shadow" onSubmit={handleSubmit}>
-        {message ? (<div
-          className="alert alert-success alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>{message}!</strong>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-          ></button>
-        </div>
-        ): null}
+      <h1 className="display-4 h-1">Add the services you offer</h1>
+      <form
+        className="form-control p-4 shadow"
+        onSubmit={handleSubmit}
+        ref={formReset}
+      >
+        {message ? (
+          <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{message}!</strong>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        ) : null}
         <div className="mb-3">
           <label htmlFor="service" className="form-label">
             Select service
@@ -121,8 +130,29 @@ function UserService({ services }) {
             onChange={handleChange}
           ></textarea>
         </div>
-        <div className="col-12 ">
-          <button className="btn btn-primary" type="submit">
+        <div className="mb-3">
+          <label htmlFor="start-time" className="form-label">
+            Available  for services from
+          </label>
+          <input
+            className="form-control"
+            id="start-time"
+            type="datetime-local"
+          ></input>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="end-time" className="form-label">
+            Unavailable for servcies from
+          </label>
+          <input
+            className="form-control"
+            id="start-time"
+            type="datetime-local"
+          ></input>
+        </div>
+        <div className="col-12 submit">
+          <button className="btn btn-primary " type="submit">
             Submit
           </button>
         </div>

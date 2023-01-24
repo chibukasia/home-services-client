@@ -52,9 +52,6 @@ function SignUp({onSignUp}) {
     on_probation: false,
     address: "",
   });
-  // const [profileData, setProfileData] = useState({
-  //   bio: 'user bio',
-  // })
 
   const navigate = useNavigate()
   function handleChange(e) {
