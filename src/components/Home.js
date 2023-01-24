@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
 import UserService from './services/UserService'
+import { AppContext } from '../context'
 
-function Home({user, services}) { 
+function Home() { 
+  const {user, services} = useContext(AppContext)
   useEffect(()=>{
     document.title = "Home"
   })

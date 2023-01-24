@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AppContext } from "../../context";
 
-function UserService({services}) {
+function UserService({ services }) {
+  const [errors, setErrors] = useState([]);
+  const [message, setMessage] = useState("");
   const [userService, setUserService] = useState({
     quotation: "",
     location: "",
@@ -8,49 +11,76 @@ function UserService({services}) {
     service_id: "",
   });
 
+  const { userServices, setUserServices } = useContext(AppContext);
   const token = localStorage.getItem("token");
 
-  function handleChange(e){
-    let name = e.target.name 
-    let value = e.target.value 
-    if (name === "quotation"){
-        value = parseInt(value)
-        setUserService({...userService, [name]: value})
+  function handleChange(e) {
+    let name = e.target.name;
+    let value = e.target.value;
+    if (name === "quotation") {
+      value = parseInt(value);
+      setUserService({ ...userService, [name]: value });
     }
-    setUserService({...userService, [name]: value})
-  } 
-
-  function handleSubmit(e){
-    e.preventDefault()
-    console.log(userService)
-    fetch('http://localhost:3000/user_services',{
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userService)
-    }).then(res=>{
-        if (res.ok){
-            res.json().then(data=>console.log(data))
-        }else{
-            res.json().then(err=>console.log(err))
-        }
-    })
+    setUserService({ ...userService, [name]: value });
   }
-  useEffect(()=>{
-    document.title = "New service"
-  })
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // console.log(userService);
+    fetch("http://localhost:3000/user_services", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userService),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((data) => {
+          setUserServices([...userServices, data]);
+          setMessage("Your service has been added seccesfully");
+        });
+      } else {
+        res.json().then((err) => console.log(err));
+      }
+    });
+  }
+  useEffect(() => {
+    document.title = "New service";
+  });
   return (
     <div className="service-form">
       <form className="form-control p-4 shadow" onSubmit={handleSubmit}>
+        {message ? (<div
+          className="alert alert-success alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>{message}!</strong>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        ): null}
         <div className="mb-3">
           <label htmlFor="service" className="form-label">
             Select service
           </label>
-          <select className="form-select" aria-label="Default select example" name="service_id" id="service" onChange={handleChange}>
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            name="service_id"
+            id="service"
+            onChange={handleChange}
+          >
             <option defaultValue>Select Service</option>
-            {services.map(service=><option key={service.id} value={service.id}>{service.service_name}</option>)}
+            {services.map((service) => (
+              <option key={service.id} value={service.id}>
+                {service.service_name}
+              </option>
+            ))}
           </select>
         </div>
         <div className="mb-3">

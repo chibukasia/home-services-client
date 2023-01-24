@@ -11,10 +11,12 @@ import ContactUs from './components/ContactUs';
 import Services from './components/services/Services';
 import ServiceForm from './components/services/ServiceForm';
 import Footer from './components/Footer';
+import { AppContext } from './context';
+import { useContext } from 'react';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [services, setServices] = useState([])
+  const {user, setUser} = useContext(AppContext)
+  const {services, setServices, useServices, setUserServices} = useContext(AppContext)
   const token = localStorage.getItem('token')
   useEffect(() => {
     fetch("http://localhost:3000/logged_user",{
@@ -50,7 +52,7 @@ function App() {
     <div className="App">
       <ResponsiveAppBar user={user} setUser={setUser}/>
       <Routes>
-        <Route exact path='/' element={<Home user={user} services={services}/>}/>
+        <Route exact path='/' element={<Home/>}/>
         <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>
         <Route exact path='/login' element={<SignIn onLogin={setUser}/>}/>
         <Route exact path='/about' element={<About/>}/>
