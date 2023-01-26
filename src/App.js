@@ -49,6 +49,16 @@ function App() {
     })
   },[])
   
+  useEffect(()=>{
+    fetch("http://localhost:3000/user_services")
+    .then(res=>{
+      if(res.ok){
+        res.json().then(data=>setUserServices(data))
+      }else{
+        res.json().then(err=>console.log(err))
+      }
+    })
+  },[])
   return (
     <div className="App">
       <ResponsiveAppBar user={user} setUser={setUser}/>
