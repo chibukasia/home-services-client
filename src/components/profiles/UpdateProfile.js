@@ -18,7 +18,7 @@ function UpdateProfile() {
     }else{
         console.log("Finding user")
     }
-  }, []);
+  }, [user]);
 
   function handleChange(e) {}
   console.log(userProfile);

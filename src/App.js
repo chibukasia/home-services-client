@@ -14,6 +14,8 @@ import Footer from './components/Footer';
 import UserService from './components/services/UserService';
 import { AppContext } from './context';
 import { useContext } from 'react';
+import UpdateProfile from './components/profiles/UpdateProfile';
+import Profile from './components/profiles/Profile';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
@@ -71,6 +73,8 @@ function App() {
         <Route exact path='/services' element={<Services/>}/>
         <Route exact path='/new-service' element={<ServiceForm/>}/>
         <Route exact path='/add-user-service' element={<UserService services={services}/>}/>
+        <Route exact path='/update-profile' element={<UpdateProfile/>}/>
+        <Route exact path='/profile' element={<Profile/>}/>
       </Routes>
       <footer><Footer/></footer>
     </div>
