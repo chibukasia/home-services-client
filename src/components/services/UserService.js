@@ -137,7 +137,9 @@ function UserService({ services }) {
           <input
             className="form-control"
             id="start-time"
-            type="datetime-local"
+            name="start_time"
+            type="time"
+            onChange={handleChange}
           ></input>
         </div>
 
@@ -148,7 +150,9 @@ function UserService({ services }) {
           <input
             className="form-control"
             id="start-time"
-            type="datetime-local"
+            name="end_time"
+            type="time"
+            onChange={handleChange}
           ></input>
         </div>
         <div className="col-12 submit">
