@@ -1,37 +1,75 @@
 import React, { useState } from "react";
 
 function AddTerm() {
-  const [description, setDescription] = useState('')
-  const token = localStorage.getItem('token')
-  function handleChange(e){
-    setDescription(e.target.value)
-  } 
+  const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [success, setSuccess] = useState('')
+  const token = localStorage.getItem("token");
+  function handleChange(e) {
+    setDescription(e.target.value);
+  }
 
-  async function handleSubmit(e){
-    e.preventDefault()
-    await fetch('http://localhost:3000/terms_and_conditions', {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({description})
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await fetch("http://localhost:3000/terms_and_conditions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ description }),
     })
-    .then(res=>{
-        if (res.ok){
-            res.json().then(data=>console.log(data))
-        }else{
-            res.json().then(err=>console.log(err))
+      .then((res) => {
+        if (res.ok) {
+          res.json().then((data) => {
+            console.log(data)
+            setSuccess("Terms and Conditions added successfuly")
+          }
+          )
+            
+        } else {
+          res.json().then((err) => setErrors(err.errors));
         }
-    })
-    .catch(err=>{
-        console.error(`There has been an error of ${err}`)
-    })
+      })
+      .catch((err) => {
+        console.error(`There has been an error of ${err}`);
+      });
   }
 
   return (
     <div className="service-form">
       <h2 className="display-2"> Add Terms and Conditions</h2>
+      {success ? (
+      <div
+            className="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>{success}</strong> 
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+        </div>
+      ):(null)}
+      {errors.map((error) => {
+        return (
+          <div
+            className="alert alert-warning alert-dismissible fade show"
+            role="alert"
+            key={error}
+          >
+            <strong>{error}</strong> 
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+        );
+      })}
       <form className="form-control" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
