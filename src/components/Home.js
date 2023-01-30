@@ -11,6 +11,9 @@ function Home() {
   return (
     <div className='main'>
       {user ? <h2>Hello there {user.username}</h2>: <h2>Login</h2>}
+      <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
     </div>
   )
 }
