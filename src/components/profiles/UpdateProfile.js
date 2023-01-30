@@ -14,7 +14,6 @@ function UpdateProfile() {
     password: "",
     password_confirmation: '',
   });
-
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (user) {
@@ -30,11 +29,12 @@ function UpdateProfile() {
 
     setUserProfile({...userProfile, [name]: value})
   }
-  
+
   function handleSubmit(e){
     e.preventDefault()
+    console.log(user.id)
     fetch(`http://localhost:3000/users/${user.id}`,{
-      method: "POST",
+      method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
@@ -43,7 +43,7 @@ function UpdateProfile() {
     }).then(res=>{
       if(res.ok){
         res.json().then(data=>{
-
+          console.log(data)
         })
       }else{
         res.json().then(error=>console.log(error))
