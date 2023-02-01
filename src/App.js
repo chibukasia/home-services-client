@@ -15,6 +15,7 @@ import { AppContext } from './context';
 import { useContext } from 'react';
 import UpdateProfile from './components/profiles/UpdateProfile';
 import Profile from './components/profiles/Profile';
+import AddTerm from './components/terms_and_conditions/AddTerm';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
@@ -88,6 +89,7 @@ function App() {
         <Route exact path='/add-user-service' element={<UserService services={services}/>}/>
         <Route exact path='/update-profile' element={<UpdateProfile/>}/>
         <Route exact path='/profile' element={<Profile/>}/>
+        <Route exact path='/new-condition' element={<AddTerm/>}/>
       </Routes>
       <footer><Footer/></footer>
     </div>

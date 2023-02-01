@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useRef } from "react";
+import { AppContext } from "../../context";
 
 function AddTerm() {
   const [description, setDescription] = useState("");
@@ -8,6 +9,9 @@ function AddTerm() {
   function handleChange(e) {
     setDescription(e.target.value);
   }
+
+  const formRef = useRef()
+  const {terms, setTerms} = useContext(AppContext)
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,8 +26,9 @@ function AddTerm() {
       .then((res) => {
         if (res.ok) {
           res.json().then((data) => {
-            console.log(data)
+            setTerms([...terms, data])
             setSuccess("Terms and Conditions added successfuly")
+            formRef.current.reset()
           }
           )
             
@@ -70,7 +75,7 @@ function AddTerm() {
           </div>
         );
       })}
-      <form className="form-control" onSubmit={handleSubmit}>
+      <form className="form-control" onSubmit={handleSubmit} ref={formRef}>
         <div className="mb-3">
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
             Enter the terms and conditions here
