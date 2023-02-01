@@ -1,6 +1,7 @@
 import React from 'react'
 import './services.css'
 import plumbing from '../../images/plumbing.jpg'
+import { Link } from 'react-router-dom'
 
 function UserServiceCard({service}) {
 
@@ -15,7 +16,7 @@ function UserServiceCard({service}) {
         <h6>Service person: {fullName}</h6>
         <h6 className=''>Available form: {service.start_time} Am</h6>
         <h6>Ends services at: {service.end_time} Pm</h6>
-        <a href='#' className='btn btn-primary stretched-link'>Make appointment</a>
+        <Link to={`user-service/${service.id}/new-appointment`} className='btn btn-primary stretched-link'>Make appointment</Link>
     </div>
   )
 }

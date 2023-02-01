@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import UpdateProfile from './components/profiles/UpdateProfile';
 import Profile from './components/profiles/Profile';
 import AddTerm from './components/terms_and_conditions/AddTerm';
+import AppointmentForm from './components/appointments/AppointmentForm';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
@@ -79,17 +80,18 @@ function App() {
     <div className="App">
       <ResponsiveAppBar user={user} setUser={setUser}/>
       <Routes>
-        <Route exact path='/' element={<Home/>}/>
-        <Route exact path='/signup' element={<SignUp onSignUp={setUser}/>}/>
-        <Route exact path='/login' element={<SignIn onLogin={setUser}/>}/>
-        <Route exact path='/about' element={<About/>}/>
-        <Route exact path='/contact' element={<ContactUs/>}/>
-        <Route exact path='/services' element={<Services/>}/>
-        <Route exact path='/new-service' element={<ServiceForm/>}/>
-        <Route exact path='/add-user-service' element={<UserService services={services}/>}/>
-        <Route exact path='/update-profile' element={<UpdateProfile/>}/>
-        <Route exact path='/profile' element={<Profile/>}/>
-        <Route exact path='/new-condition' element={<AddTerm/>}/>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/signup' element={<SignUp onSignUp={setUser}/>}/>
+        <Route path='/login' element={<SignIn onLogin={setUser}/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<ContactUs/>}/>
+        <Route path='/services' element={<Services/>}/>
+        <Route path='/new-service' element={<ServiceForm/>}/>
+        <Route path='/add-user-service' element={<UserService services={services}/>}/>
+        <Route path='/update-profile' element={<UpdateProfile/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/new-condition' element={<AddTerm/>}/>
+        <Route path='/user-service/:id/new-appointment' element={<AppointmentForm/>}/>
       </Routes>
       <footer><Footer/></footer>
     </div>
