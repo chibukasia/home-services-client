@@ -1,6 +1,8 @@
 
 .App {
   text-align: left;
+  background-color: #130b23;
+  color: white;
   /* background-image: linear-gradient(to bottom right, rgb(17, 6, 58) , rgb(55, 42, 129)); */
   /* color: white; */
   /* height: 100vh; */
@@ -62,7 +64,15 @@ footer{
   color: #fff;
   background-color: #4076D2;
 }
-
+.main {
+  width: 80%;
+  margin: 10px auto;
+}
+.main-content {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+}
 
 @media only screen and (max-width: 600px) {
   .service-form {

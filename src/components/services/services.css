@@ -2,3 +2,30 @@
     width: 100%;
     margin: 10px auto;
 }
+.card {
+    background-color: #161314;
+    color: white;
+    width: 23.5%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.btn {
+    background-color: #1b1620;
+}
+.btn:hover{
+    background-color: #51346d;
+}
+
+@media only screen and (max-width: 600px) {
+  .service-form {
+    width: 100%;
+    margin: 3rem auto;
+  }
+  .main{
+    width: 90%;
+  }
+  .card {
+    width: 100%;
+  }
+}

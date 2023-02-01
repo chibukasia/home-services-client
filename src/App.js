@@ -74,7 +74,7 @@ function App() {
     .catch(err=>{
       console.log(`The following error has occured: ${err}`)
     })
-  },[])
+  },[]) 
   return (
     <div className="App">
       <ResponsiveAppBar user={user} setUser={setUser}/>
