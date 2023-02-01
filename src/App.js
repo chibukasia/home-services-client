@@ -1,10 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import SignUp from './components/authentication/SignUp';
 import SignIn from './components/authentication/Login';
-import { useEffect, useState} from 'react';
+import { useEffect} from 'react';
 import ResponsiveAppBar from './components/NavBar';
 import About from './components/About';
 import ContactUs from './components/ContactUs';
@@ -19,7 +18,7 @@ import Profile from './components/profiles/Profile';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
-  const {services, setServices, useServices, setUserServices} = useContext(AppContext)
+  const {services, setServices, setUserServices, setTerms} = useContext(AppContext)
   const token = localStorage.getItem('token')
   useEffect(() => {
     fetch("http://localhost:3000/logged_user",{
@@ -59,6 +58,20 @@ function App() {
       }else{
         res.json().then(err=>console.log(err))
       }
+    })
+  },[]) 
+
+  useEffect(()=>{
+    fetch("http://localhost:3000/terms_and_conditions")
+    .then(res=>{
+      if (res.ok){
+        res.json().then(data=>setTerms(data))
+      }else{
+        res.json().then(err=>console.log(err))
+      }
+    })
+    .catch(err=>{
+      console.log(`The following error has occured: ${err}`)
     })
   },[])
   return (
