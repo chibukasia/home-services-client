@@ -65,7 +65,7 @@ function ServiceForm() {
           );
         })}
         <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
+          <label htmlFor="name" className="form-label">
             Service name
           </label>
           <input
@@ -79,12 +79,12 @@ function ServiceForm() {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
+          <label htmlFor="description" className="form-label">
             Service description
           </label>
           <textarea
             className="form-control"
-            id="exampleFormControlTextarea1"
+            id="description"
             rows="3"
             name="description"
             required

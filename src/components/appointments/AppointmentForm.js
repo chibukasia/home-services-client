@@ -7,9 +7,11 @@ function AppointmentForm() {
   const params = useParams()
   const {userServices} = useContext(AppContext)
   const service = userServices.find(userService=> userService.id.toString() === params.id)
-  const fullName = `${service.user.first_name.charAt(0).toUpperCase() + service.user.first_name.substring(1)} 
+  let fullName = ''
+
+  if (service){
+  fullName = `${service.user.first_name.charAt(0).toUpperCase() + service.user.first_name.substring(1)} 
                     ${service.user.last_name.charAt(0).toUpperCase() + service.user.last_name.substring(1)}`
-  
   return (
     <div className='appointment'>
         <div className=''>
@@ -37,14 +39,23 @@ function AppointmentForm() {
             <h5>Address: {service.user.address}</h5>
             <p>Ratings: </p>
         </div>
-        <div className=''>
+        <div className='service-form'>
             <h2 className='display-6'>Make Appointment</h2>
             <form className='form-control'>
-
+                <div className='mb-3'>
+                    <label htmlFor='date' className='form-label'>Select Date</label>
+                    <input type='datetime-local' className='form-control' rows='3' id='date' name='date'/>
+                </div>
+                <div className='col-12 d-grid'>
+                    <button type='submit' className='btn btn-primary'> Make Appointment</button>
+                </div>
             </form>
         </div>
     </div>
   )
+  }else{
+    return(<div className='spinner-border" role="status"'><span className="visually-hidden">Loading...</span></div>)  
+  }
 }
 
 export default AppointmentForm
