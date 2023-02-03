@@ -1,15 +1,43 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { AppContext } from '../../context'
 import './appointments.css'
 
 function AppointmentForm() {
+  const [appointment_date, setAppointmentDate] = useState(null)
   const params = useParams()
   const {userServices} = useContext(AppContext)
   const service = userServices.find(userService=> userService.id.toString() === params.id)
   let fullName = ''
+  const token = localStorage.getItem('token')
+  function handleChange(e){
+    setAppointmentDate(e.target.value)
+  }
 
+  
   if (service){
+    async function handleSubmit(e){
+        e.preventDefault()
+        await fetch('http://localhost:3000/appointment_orders', {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({appointment_date: appointment_date, user_service_id: service.id, status: false})
+        })
+        .then((res)=>{
+            if(res.ok){
+                res.json().then(console.log)
+            }else{
+                res.json().then(console.log)
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+        console.log(appointment_date)
+      }
   fullName = `${service.user.first_name.charAt(0).toUpperCase() + service.user.first_name.substring(1)} 
                     ${service.user.last_name.charAt(0).toUpperCase() + service.user.last_name.substring(1)}`
   return (
@@ -41,10 +69,10 @@ function AppointmentForm() {
         </div>
         <div className='service-form'>
             <h2 className='display-6'>Make Appointment</h2>
-            <form className='form-control'>
+            <form className='form-control' onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlFor='date' className='form-label'>Select Date</label>
-                    <input type='datetime-local' className='form-control' rows='3' id='date' name='date'/>
+                    <input type='datetime-local' className='form-control' rows='3' id='date' name='appointment_date' onChange={handleChange}/>
                 </div>
                 <div className='col-12 d-grid'>
                     <button type='submit' className='btn btn-primary'> Make Appointment</button>
