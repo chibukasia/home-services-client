@@ -42,7 +42,7 @@ function AppointmentForm() {
                     ${service.user.last_name.charAt(0).toUpperCase() + service.user.last_name.substring(1)}`
   return (
     <div className='appointment'>
-        <div className=''>
+        <div className='shadow'>
             <h2 className='display-6'>Appointment Details</h2>
             <h4 className='display-6'>Service Details</h4>
             <div>
