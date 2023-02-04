@@ -24,7 +24,7 @@ function AppointmentForm() {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({appointment_date: appointment_date, user_service_id: service.id, status: false})
+            body: JSON.stringify({appointment_date: appointment_date, user_service_id: service.id, status: "pending"})
         })
         .then((res)=>{
             if(res.ok){
