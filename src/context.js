@@ -7,6 +7,7 @@ function ContextProvider({children}){
     const [services, setServices] = useState([])
     const [terms, setTerms] = useState([])
     const [userServices, setUserServices] = useState([])
+    const [appointmentOrders, setAppointmentOrders] = useState([])
     const value={
         user,
         setUser,
@@ -16,6 +17,8 @@ function ContextProvider({children}){
         setUserServices, 
         terms,
         setTerms,
+        appointmentOrders,
+        setAppointmentOrders,
     }
     return(
         <AppContext.Provider value={value}>

@@ -20,7 +20,7 @@ import AppointmentForm from './components/appointments/AppointmentForm';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
-  const {services, setServices, setUserServices, setTerms} = useContext(AppContext)
+  const {services, setServices, setUserServices, setTerms, setAppointmentOrders} = useContext(AppContext)
   const token = localStorage.getItem('token')
   useEffect(() => {
     fetch("http://localhost:3000/logged_user",{
@@ -76,6 +76,24 @@ function App() {
       console.log(`The following error has occured: ${err}`)
     })
   },[]) 
+
+  useEffect(()=>{
+    fetch('http://localhost:3000/appointment_orders', {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(res=>{
+      if (res.ok){
+        res.json().then(data=>setAppointmentOrders(data))
+      }else{
+        res.json().then(error=>console.log(error))
+      }
+    })
+    .catch(error=>console.log(error))
+  },[])
+
+
   return (
     <div className="App">
       <ResponsiveAppBar user={user} setUser={setUser}/>

@@ -36,7 +36,7 @@ function AppointmentForm() {
         .catch((error)=>{
             console.log(error)
         })
-        console.log(appointment_date)
+        console.log(appointment_date, {status: false})
       }
   fullName = `${service.user.first_name.charAt(0).toUpperCase() + service.user.first_name.substring(1)} 
                     ${service.user.last_name.charAt(0).toUpperCase() + service.user.last_name.substring(1)}`
