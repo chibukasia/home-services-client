@@ -15,7 +15,7 @@ function AppointmentDetails() {
     return (
       <div>
         <h2>Plumbing</h2>
-        <IncidentModal id={id} />
+        <IncidentModal id={id}/>
       </div>
     );
   } else {
