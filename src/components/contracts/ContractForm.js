@@ -14,7 +14,7 @@ function ContractForm() {
             className="form-control"
             name="title"
             id="title"
-            placeholder="Enter the title of the contract"
+            placeholder="Eg House Maid"
           />
         </div>
         <div className="form-control">
@@ -52,11 +52,23 @@ function ContractForm() {
             placeholder="Enter the amount you expect to be paid per month"
           />
         </div>
-        <div className="input-group mb-3">
-          <input type="file" className="form-control" id="file-upload" />
-          <label className="input-group-text" htmlFor="file-upload">
-            upload copy of ID 
+        <div className="form-control">
+          <label className="col-form-label" htmlFor="id_number">
+            Enter ID Number
           </label>
+          <input
+            type="number"
+            className="form-control"
+            // name="period"
+            id="id_number"
+            placeholder="Enter your ID number"
+          />
+        </div>
+        <div className="form-control mb-3">
+          <label className="col-form-label" htmlFor="file-upload">
+            Upload copy of ID 
+          </label>
+          <input type="file" className="form-control" id="file-upload" />
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
