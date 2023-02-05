@@ -23,6 +23,7 @@ const pages = [
   { name: "Hire", link: "#" },
   { name: "About", link: "/about" },
   { name: "Contact Us", link: "/contact" },
+  { name: "Contracts", link: "/contracts"}
 ];
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];

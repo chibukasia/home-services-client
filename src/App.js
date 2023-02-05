@@ -19,6 +19,7 @@ import AddTerm from './components/terms_and_conditions/AddTerm';
 import AppointmentForm from './components/appointments/AppointmentForm';
 import Appointments from './components/appointments/Appointments';
 import AppointmentDetails from './components/appointments/AppointmentDetails';
+import ContractForm from './components/contracts/ContractForm';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
@@ -106,6 +107,7 @@ function App() {
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<ContactUs/>}/>
         <Route path='/services' element={<Services/>}/>
+        <Route path='/contracts' element={<ContractForm/>}/>
         <Route path='/new-service' element={<ServiceForm/>}/>
         <Route path='/add-user-service' element={<UserService services={services}/>}/>
         <Route path='/update-profile' element={<UpdateProfile/>}/>
