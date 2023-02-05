@@ -18,6 +18,7 @@ import Profile from './components/profiles/Profile';
 import AddTerm from './components/terms_and_conditions/AddTerm';
 import AppointmentForm from './components/appointments/AppointmentForm';
 import Appointments from './components/appointments/Appointments';
+import AppointmentDetails from './components/appointments/AppointmentDetails';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
@@ -111,7 +112,8 @@ function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/new-condition' element={<AddTerm/>}/>
         <Route path='/user-service/:id/new-appointment' element={<AppointmentForm/>}/>
-        <Route path='appointments' element={<Appointments/>}/>
+        <Route path='/appointments' element={<Appointments/>}/>
+        <Route path='/appointments/:id' element={<AppointmentDetails/>}/>
       </Routes>
       <footer><Footer/></footer>
     </div>

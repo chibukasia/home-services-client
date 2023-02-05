@@ -17,7 +17,7 @@ function Appointments() {
         <td>KES {appointment.user_service.quotation}</td>
         <td>0</td>
         <td>{appointment.status}</td>
-        <td><a href="#" className="btn btn-success">View details</a></td>
+        <td><a href={`/appointments/${appointment.id}`} className="btn btn-success">View details</a></td>
       </tr>
     );
   });
