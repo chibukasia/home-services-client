@@ -113,6 +113,7 @@ function IncidentModal({id}) {
                   <div className="input-group mb-3">
                     <input
                       type="file"
+                      name='evidence'
                       className="form-control"
                       id="file-upload"
                     />

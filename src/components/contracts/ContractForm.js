@@ -87,7 +87,7 @@ function ContractForm() {
           <label className="col-form-label" htmlFor="file-upload">
             Upload copy of ID 
           </label>
-          <input type="file" className="form-control" id="file-upload" />
+          <input type="file" className="form-control" id="file-upload" name="id_copy" />
         </div>
         <button type="submit" className="btn btn-primary">
           Submit

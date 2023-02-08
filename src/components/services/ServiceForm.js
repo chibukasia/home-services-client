@@ -91,6 +91,12 @@ function ServiceForm() {
             onChange={handleChange}
           ></textarea>
         </div>
+        <div className="form-control mb-3">
+          <label className="col-form-label" htmlFor="file-upload">
+            Sample image of your work. You must be visible in the image 
+          </label>
+          <input type="file" className="form-control" id="file-upload" name="image" />
+        </div>
         <div className="col-12 d-grid">
           <button className="btn btn-primary" type="submit">
             Submit
