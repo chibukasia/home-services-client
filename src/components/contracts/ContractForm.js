@@ -1,19 +1,39 @@
 import React, { useState } from "react";
 
 function ContractForm() {
-
-  const [formData, setFormData] = useState({})
+  const token = localStorage.getItem('token')
+  // const [formData, setFormData] = useState({})
+  const formData = new FormData()
 
   function handleChange(e){
-    let name = e.target.name;
-    let value = e.target.value
 
-    setFormData({...formData, [name]: value})
   }
 
   function handleSubmit(e){
     e.preventDefault()
-    console.log(formData)
+    formData.append('title', e.target.title.value)
+    formData.append('description', e.target.description.value)
+    formData.append('period', e.target.period.value)
+    formData.append('monthly_pay', e.target.monthly_pay.value)
+    formData.append('id_number', e.target.id_number.value)
+    formData.append('id_copy', e.target.id_copy.files[0])
+
+    console.log(formData.get('id_copy'))
+    fetch("http://localhost:3000/user_contracts", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    })
+    .then(res=>{
+      if(res.ok){
+        res.json().then(console.log)
+      }else{
+        res.json().then(console.log)
+      }
+    })
+    .catch(error=>console.log(error))
   }
   return (
     <div className="service-form">
@@ -87,7 +107,7 @@ function ContractForm() {
           <label className="col-form-label" htmlFor="file-upload">
             Upload copy of ID 
           </label>
-          <input type="file" className="form-control" id="file-upload" name="id_copy" />
+          <input type="file" className="form-control" id="file-upload" name="id_copy"/>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit

@@ -3,30 +3,41 @@ import React, {useState} from 'react'
 function IncidentModal({id}) {
   const token  = localStorage.getItem('token')
 
-  const [formData, setFormData] = useState({
-    incident_name: "",
-    incident_location: "",
-    incident_description: "",
-    appointment_order_id: parseInt(id),
-    resolved: false,
-  });
-
+  // const [formData, setFormData] = useState({
+  //   incident_name: "",
+  //   incident_location: "",
+  //   incident_description: "",
+  //   appointment_order_id: parseInt(id),
+  //   resolved: false,
+  // });
+  const formData = new FormData()
   function handleChange(e) {
-    let name = e.target.name;
-    let value = e.target.value;
+    // let name = e.target.name;
+    // let value = e.target.value;
 
-    setFormData({ ...formData, [name]: value });
+    // setFormData({ ...formData, [name]: value });
   }
+
+  
 
   function handleSubmit(e){
     e.preventDefault()
+    formData.append('incident[incident_name]', e.target.incident_name.value)
+    formData.append('incident[incident_location]', e.target.incident_location.value)
+    formData.append('incident[incident_description]', e.target.incident_description.value)
+    formData.append('incident[appointment_order_id]', parseInt(id))
+    formData.append('incident[resolved]', false)
+    let newFiles = e.target.evidences.files
+    for (let file of newFiles){
+      formData.append('incident[evidences][]', file, file.name)
+    }
+    // console.log(formData.getAll('evidences'))
     fetch("http://localhost:3000/incidents",{
         method: "POST",
         headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData)
+        body: formData
     }).then(res=>{
         if(res.ok){
             res.json().then(console.log)
@@ -113,9 +124,10 @@ function IncidentModal({id}) {
                   <div className="input-group mb-3">
                     <input
                       type="file"
-                      name='evidence'
+                      name='evidences'
                       className="form-control"
                       id="file-upload"
+                      multiple
                     />
                     <label className="input-group-text" htmlFor="file-upload">
                       upload
