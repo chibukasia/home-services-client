@@ -26,16 +26,28 @@ function UserService({ services }) {
     setUserService({ ...userService, [name]: value });
   }
 
+  const formData = new FormData()
+
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(userService);
+
+    formData.append('user_service[service_id]', e.target.service_id.value)
+    formData.append('user_service[quotation]', e.target.quotation.value)
+    formData.append('user_service[location]', e.target.location.value)
+    formData.append('user_service[description]', e.target.description.value)
+    formData.append('user_service[start_time]', e.target.start_time.value)
+    formData.append('user_service[end_time]', e.target.end_time.value)
+    
+    for (let file of e.target.images.files){
+      formData.append('user_service[images][]', file, file.name)
+    }
+
     fetch("http://localhost:3000/user_services", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify(userService),
+      body: formData,
     }).then((res) => {
       if (res.ok) {
         res.json().then((data) => {
@@ -154,6 +166,12 @@ function UserService({ services }) {
             type="time"
             onChange={handleChange}
           ></input>
+        </div>
+        <div className="form-control mb-3">
+          <label className="col-form-label" htmlFor="file-upload">
+            Sample images of your work. You must be visible in the first two images 
+          </label>
+          <input type="file" className="form-control" id="file-upload" name="images" multiple/>
         </div>
         <div className="col-12 submit">
           <button className="btn btn-primary " type="submit">
