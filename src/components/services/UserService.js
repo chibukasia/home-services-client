@@ -56,7 +56,7 @@ function UserService({ services }) {
           formReset.current.reset();
         });
       } else {
-        res.json().then((err) => console.log(err));
+        res.json().then((err) => setErrors(err.errors));
       }
     });
   }
@@ -84,7 +84,23 @@ function UserService({ services }) {
               aria-label="Close"
             ></button>
           </div>
-        ) : null}
+        ) : null} 
+
+        {errors.map(error=>{
+          return <div
+          className="alert alert-danger alert-dismissible fade show"
+          role="alert"
+          key={error}
+        >
+          <strong>{error}!</strong>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        })}
         <div className="mb-3">
           <label htmlFor="service" className="form-label">
             Select service
