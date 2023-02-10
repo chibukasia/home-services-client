@@ -29,3 +29,29 @@
     width: 100%;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .service-form {
+    width: 100%;
+    margin: 3rem auto;
+  }
+  .main{
+    width: 85%;
+  }
+  .card {
+    width: 47%;
+  }
+}
+
+@media only screen and (min-width: 1260px) {
+  .service-form {
+    width: 50%;
+    margin: 3rem auto;
+  }
+  .main{
+    width: 80%;
+  }
+  .card {
+    width: 23.5%;
+  }
+}

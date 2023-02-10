@@ -80,3 +80,10 @@ footer{
     margin: 3rem auto;
   }
 }
+
+@media only screen and (min-width: 600px) {
+  .service-form {
+    width: 100%;
+    margin: 3rem auto;
+  }
+}
