@@ -1,5 +1,6 @@
 import React, {useEffect, useContext} from 'react'
 import { AppContext } from '../context'
+import ReviewForm from './reviews/ReviewForm'
 import UserServiceCard from './services/UserServiceCard'
 
 function Home() { 
@@ -18,6 +19,7 @@ function Home() {
       <div className='main-content'>
       {serviceCards}
     </div>
+    <ReviewForm/>
     </div>
     
   )
