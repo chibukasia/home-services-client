@@ -11,11 +11,11 @@ function Appointments() {
       <tr className="table-dark" key={appointment.id}>
         <th scope="row">{i++}</th>
         <td>Plumbing</td>
-        <td>{appointment.created_at}</td>
-        <td>{appointment.appointment_date}</td>
-        <td>Here</td>
+        <td>{new Date(appointment.created_at).toDateString()}</td>
+        <td>{new Date(appointment.appointment_date).toDateString()}</td>
+        <td>{`${appointment.user.first_name} ${appointment.user.last_name}`}</td>
         <td>KES {appointment.user_service.quotation}</td>
-        <td>0</td>
+        <td>{appointment.incidents ? appointment.incidents.length : 0}</td>
         <td>{appointment.status}</td>
         <td><a href={`/appointments/${appointment.id}`} className="btn btn-success">View details</a></td>
       </tr>

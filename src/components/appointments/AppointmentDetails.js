@@ -12,7 +12,6 @@ function AppointmentDetails() {
 
   
   if (appointment) {
-    console.log(appointment)
     return (
       <div>
         <IncidentModal id={id}/>
