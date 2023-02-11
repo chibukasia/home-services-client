@@ -20,6 +20,7 @@ import AppointmentForm from './components/appointments/AppointmentForm';
 import Appointments from './components/appointments/Appointments';
 import AppointmentDetails from './components/appointments/AppointmentDetails';
 import ContractForm from './components/contracts/ContractForm';
+import UserAppointments from './components/appointments/UserAppointments';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
@@ -126,6 +127,7 @@ function App() {
         <Route path='/new-condition' element={<AddTerm/>}/>
         <Route path='/user-service/:id/new-appointment' element={<AppointmentForm/>}/>
         <Route path='/appointments' element={<Appointments/>}/>
+        <Route path='/my-appointments' element={<UserAppointments/>}/>
         <Route path='/appointments/:id' element={<AppointmentDetails/>}/>
       </Routes>
       <footer><Footer/></footer>

@@ -64,9 +64,6 @@ function AppointmentDetails() {
             <hr />
           </div>
           <div className="appointment-details card-body">
-          <div className="col-sm-3">
-                <h4 className="mb-0">Service Details</h4>
-              </div>
           <div className="row">
               <div className="col-sm-3">
                 <h6 className="mb-0">Service Name</h6>
