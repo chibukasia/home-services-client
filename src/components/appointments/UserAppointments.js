@@ -13,7 +13,7 @@ function UserAppointments() {
       <tr className="table-dark" key={appointment.id}>
         <th scope="row">{i++}</th>
         <td>{service.service_name}</td>
-        <td>{new Date(appointment.created_at).toDateString()}</td>
+        {/* <td>{new Date(appointment.created_at).toDateString()}</td> */}
         <td>{new Date(appointment.appointment_date).toDateString()}</td>
         <td>{`${servicePerson.full_name}`}</td>
         <td>KES {appointment.user_service.quotation}</td>
@@ -30,8 +30,8 @@ function UserAppointments() {
           <tr className="table-dark">
             <th scope="col">#</th>
             <th scope="col">Service</th>
-            <th scope="col">Created</th>
-            <th scope="col">Date</th>
+            {/* <th scope="col">Created</th> */}
+            <th scope="col">Appointment Date</th>
             <th scope="col">Service Person</th>
             <th scope="col">Amount</th>
             <th scope="col">No of Incidents</th>
