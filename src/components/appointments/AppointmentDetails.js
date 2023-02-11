@@ -2,29 +2,116 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../context";
 import IncidentModal from "../incidents/IncidentModal";
+// import profile from '../../images/profile.jpg'
 
 function AppointmentDetails() {
   const { id } = useParams();
-  const { appointmentOrders } = useContext(AppContext);
+  const { appointmentOrders, users, services } = useContext(AppContext);
   const appointment = appointmentOrders.find(
     (order) => order.id.toString() === id
   );
-
-  
+  const profile =
+    "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=";
   if (appointment) {
+    const user = users.find(
+      (user) => user.id === appointment.user_service.user_id
+    );
+    const service = services.find(
+      (service) => service.id === appointment.user_service.service_id
+    );
     return (
-      <div>
-        <IncidentModal id={id}/>
-        <h2>Plumbing</h2>
-        <p>{appointment.user_service.description}</p>
-        <h4>Date: {new Date(appointment.appointment_date).toLocaleString()}</h4>
-        <h4>Status: {appointment.status.charAt(0).toUpperCase()+ appointment.status.substring(1)}</h4>
-        <h4>Quotation: KES {appointment.user_service.quotation}</h4>
-        <h4>Service Person details</h4>
-        <h4>Name: {`${appointment.user.first_name} ${appointment.user.last_name}`}</h4>
-        <h4>Phone: {appointment.user.phone}</h4>
-        <h4>Email: {appointment.user.email}</h4>
-        <h4>Number of reported incidents: {appointment.incidents ? appointment.incidents.length : 0}</h4>
+      <div className="appointment">
+        <IncidentModal id={id} />
+        <div className="appointment-card">
+          <div className="profile">
+            <div className="d-flex flex-column align-items-center text-center">
+              <img
+                src={user.profile.image_url ? user.profile.image_url : profile}
+                alt="Admin"
+                className="rounded-circle"
+                width="150"
+              />
+              <div className="col-sm-6">
+                {/* <h4 className="mb-0">Service Person details</h4> */}
+              </div>
+              <div className="mt-3">
+                <p className="text-secondary mb-1">
+                  {user.role === "regular" ? "Service Person" : "Home Owner"}
+                </p>
+                <p className="text-muted font-size-sm">{user.address}</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Full Name</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{user.full_name}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Email</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{user.email}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Phone</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{user.phone}</div>
+            </div>
+            <hr />
+          </div>
+          <div className="appointment-details card-body">
+          <div className="col-sm-3">
+                <h4 className="mb-0">Service Details</h4>
+              </div>
+          <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Service Name</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{service.service_name}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Service Description</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{appointment.user_service.description}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Appointment Date</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{new Date(appointment.appointment_date).toLocaleString()}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Status</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{appointment.status.charAt(0).toUpperCase() +
+                appointment.status.substring(1)}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Quotation</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">KES {appointment.user_service.quotation}</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-sm-3">
+                <h6 className="mb-0">Incidents Reported</h6>
+              </div>
+              <div className="col-sm-9 text-secondary">{appointment.incidents ? appointment.incidents.length : 0}</div>
+            </div>
+            <hr />
+          </div>
+        </div>
       </div>
     );
   } else {

@@ -3,17 +3,18 @@ import { AppContext } from "../../context";
 import './appointments.css'
 
 function Appointments() {
-  const { appointmentOrders } = useContext(AppContext);
-  
+  const { appointmentOrders, users, services } = useContext(AppContext);
   let i = 1;
   const appointmentDisplays = appointmentOrders.map((appointment) => {
+    const user = users.find(user=>user.id === appointment.user_service.user_id)
+    const service = services.find(service=>service.id === appointment.user_service.service_id)
     return (
       <tr className="table-dark" key={appointment.id}>
         <th scope="row">{i++}</th>
-        <td>Plumbing</td>
+        <td>{service.service_name}</td>
         <td>{new Date(appointment.created_at).toDateString()}</td>
         <td>{new Date(appointment.appointment_date).toDateString()}</td>
-        <td>{`${appointment.user.first_name} ${appointment.user.last_name}`}</td>
+        <td>{`${user.full_name}`}</td>
         <td>KES {appointment.user_service.quotation}</td>
         <td>{appointment.incidents ? appointment.incidents.length : 0}</td>
         <td>{appointment.status}</td>
