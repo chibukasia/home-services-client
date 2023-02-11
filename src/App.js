@@ -23,7 +23,7 @@ import ContractForm from './components/contracts/ContractForm';
 
 function App() {
   const {user, setUser} = useContext(AppContext)
-  const {services, setServices, setUserServices, setTerms, setAppointmentOrders} = useContext(AppContext)
+  const {services, setServices, setUserServices, setTerms, setAppointmentOrders, setUsers} = useContext(AppContext)
   const token = localStorage.getItem('token')
   useEffect(() => {
     fetch("http://localhost:3000/logged_user",{
@@ -96,6 +96,17 @@ function App() {
     .catch(error=>console.log(error))
   },[])
 
+  useEffect(()=>{
+    fetch('http://localhost:3000/users')
+    .then(res=>{
+      if(res.ok){
+        res.json().then(data=>setUsers(data))
+      }else{
+        res.json().then(console.log)
+      }
+    })
+    .catch(error=>console.log(error))
+  },[])
 
   return (
     <div className="App">
