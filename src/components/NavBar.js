@@ -173,7 +173,7 @@ function ResponsiveAppBar({user, setUser}) {
                 </MenuItem>
               ))} */}
               <MenuItem onClick={handleCloseUserMenu}>
-                  <Link className="links">Profile</Link>
+                  <Link className="links" to='/profile'>Profile</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseUserMenu}>
                   <Link className="links">Dashboard</Link>
