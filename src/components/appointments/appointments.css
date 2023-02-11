@@ -9,4 +9,64 @@ h2, h2, h3, h4 {
     border: 1px solid red;
     border-radius: 10px;
     padding: 20px;
+    
+}
+.appointment-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.profile{
+    width: 40%;
+    float: left;
+    text-align: left;
+    
+}
+profile h3, h4, h5, h6 {
+    text-align: left;
+}
+
+.appointment-details{
+    width: 60%;
+    float: right;
+}
+
+.image{
+    margin: 10px auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .appointment{
+    height: 100%;
+    width: 100%;
+  }
+  .appointment-card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .appointment-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.profile{
+    width: 100%;
+    text-align: left;
+    
+}
+profile h3, h4, h5, h6 {
+    text-align: left;
+}
+
+.appointment-details{
+    width: 100%;
+}
+
+.card-body{
+    padding: 0px;
+}
 }
