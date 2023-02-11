@@ -10,20 +10,20 @@ function AppointmentDetails() {
   const appointment = appointmentOrders.find(
     (order) => order.id.toString() === id
   );
+  
   const profile =
     "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=";
-  if (appointment) {
-    let person 
-    if (user.role == "service person"){
+  if (appointment && user) { 
+    let person = user;
+    if ( user.role == "service person"){
       person = users.find(
-        (user) => user.id === appointment.user_id
+        (user) => user.id === appointment.user.id
       );
     }else{
       person = users.find(
         (user) => user.id === appointment.user_service.user_id
       );
     }
-    
     const service = services.find(
       (service) => service.id === appointment.user_service.service_id
     );
@@ -44,7 +44,7 @@ function AppointmentDetails() {
               </div>
               <div className="mt-3">
                 <p className="text-secondary mb-1">
-                  {person.role === "regular" ? "Service Person" : "Home Owner"}
+                  {person.role === "regular" ? "Home Owner": "Service Person"}
                 </p>
                 <p className="text-muted font-size-sm">{person.address}</p>
               </div>
