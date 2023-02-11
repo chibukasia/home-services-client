@@ -1,7 +1,8 @@
-import React, {useContext}from 'react'
+import React, {useContext, useEffect, useRef}from 'react'
 import { AppContext } from "../../context";
 
 function ServicePersonAppointments() {
+  const heightRef = useRef()
   const { user, appointmentOrders, users, services } = useContext(AppContext);
   const userAppointments = appointmentOrders.filter(appointment=>appointment.user_service.user_id === user.id)
   let i = 1;
@@ -21,8 +22,17 @@ function ServicePersonAppointments() {
       </tr>
     );
   });
+
+  let veiwHeight = 100
+  useEffect(()=>{
+    if (heightRef.current.clientHeight <= 100 * 19.2){
+      veiwHeight = 100
+    }
+    console.log(heightRef.current.clientHeight)
+  },[])
+  
   return (
-    <div className="appointment-table overflow-auto">
+    <div className="appointment-table overflow-auto" ref={heightRef} style={{height: veiwHeight==100? `${veiwHeight}vh`: `${veiwHeight}%`}}>
       <table className="table table-striped table-hover">
         <thead>
           <tr className="table-dark">
