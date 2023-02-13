@@ -6,11 +6,49 @@ import IncidentModal from "../incidents/IncidentModal";
 
 function AppointmentDetails() {
   const { id } = useParams();
+  const token = localStorage.getItem('token')
   const { appointmentOrders, users, services, user } = useContext(AppContext);
   const appointment = appointmentOrders.find(
     (order) => order.id.toString() === id
   );
+
+  function handleReject(){
+    fetch(`http://localhost:3000/appointment_orders/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({status: "rejected"})
+    })
+    .then(res=>{
+      if(res.ok){
+        res.json().then(console.log)
+      }else{
+        res.json().then(console.log)
+      }
+    })
+    .catch(error=>console.log(error))
+  }
   
+  function handleAccept(){
+    fetch(`http://localhost:3000/appointment_orders/${id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({status: "accepted"})
+    })
+    .then(res=>{
+      if(res.ok){
+        res.json().then(console.log)
+      }else{
+        res.json().then(console.log)
+      }
+    })
+    .catch(error=>console.log(error))
+  }
   const profile =
     "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=";
   if (appointment && user) { 
@@ -30,6 +68,9 @@ function AppointmentDetails() {
     return (
       <div className="appointment">
         <IncidentModal id={id} />
+        {user.role === "service person" ? (
+          <><button onClick={handleAccept} className="btn btn-primary">Accept</button><button onClick={handleReject} className="btn btn-primary">Reject</button></>
+        ): null}
         <div className="appointment-card">
           <div className="profile">
             <div className="d-flex flex-column align-items-center text-center">
