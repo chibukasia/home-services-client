@@ -23,7 +23,6 @@ function Home() {
         Available Services
       </h2>
       <div className="main-content">{serviceCards}</div>
-      <ReviewForm />
     </div>
   );
 }

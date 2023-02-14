@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../context";
 import IncidentModal from "../incidents/IncidentModal";
+import ReviewForm from '../reviews/ReviewForm'
 // import profile from '../../images/profile.jpg'
 
 function AppointmentDetails() {
@@ -158,6 +159,7 @@ function AppointmentDetails() {
             <hr />
           </div>
         </div>
+        <ReviewForm/>
       </div>
     );
   } else {
