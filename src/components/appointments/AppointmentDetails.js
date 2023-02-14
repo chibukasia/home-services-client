@@ -8,7 +8,7 @@ import ReviewForm from '../reviews/ReviewForm'
 function AppointmentDetails() {
   const { id } = useParams();
   const token = localStorage.getItem('token')
-  const { appointmentOrders, users, services, user } = useContext(AppContext);
+  const { appointmentOrders, users, services, user, setAppointmentOrders } = useContext(AppContext);
   const appointment = appointmentOrders.find(
     (order) => order.id.toString() === id
   );
@@ -24,7 +24,10 @@ function AppointmentDetails() {
     })
     .then(res=>{
       if(res.ok){
-        res.json().then(console.log)
+        res.json().then(data=>{
+          const updatedAppointments = appointmentOrders.map(appointment=> appointment.id === data.id ? data : appointment)
+          setAppointmentOrders(updatedAppointments)
+        })
       }else{
         res.json().then(console.log)
       }
@@ -43,7 +46,10 @@ function AppointmentDetails() {
     })
     .then(res=>{
       if(res.ok){
-        res.json().then(console.log)
+        res.json().then(data=>{
+          const updatedAppointments = appointmentOrders.map(appointment=> appointment.id === data.id ? data : appointment)
+          setAppointmentOrders(updatedAppointments)
+        })
       }else{
         res.json().then(console.log)
       }
