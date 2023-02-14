@@ -42,7 +42,7 @@ function ReviewForm() {
             Rate the service
           </label>
           <Stack spacing={1}>
-            <Rating name="rating" defaultValue={2.5} precision={0.5} onChange={handleChange}/>
+            <Rating name="rating" defaultValue={0.0} precision={0.5} onChange={handleChange}/>
             {/* <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly /> */}
           </Stack>
         </div>

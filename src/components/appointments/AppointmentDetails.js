@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../context";
 import IncidentModal from "../incidents/IncidentModal";
-import ReviewForm from '../reviews/ReviewForm'
+import ReviewForm from '../reviews/ReviewForm';
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 // import profile from '../../images/profile.jpg'
 
 function AppointmentDetails() {
@@ -96,6 +98,10 @@ function AppointmentDetails() {
                 </p>
                 <p className="text-muted font-size-sm">{person.address}</p>
               </div>
+              <Stack spacing={1}>
+            {/* <Rating name="rating" defaultValue={0.0} precision={0.5} onChange={handleChange}/> */}
+            <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
+          </Stack>
             </div>
             <div className="row">
               <div className="col-sm-3">
